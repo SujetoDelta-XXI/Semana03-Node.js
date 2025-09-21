@@ -1,48 +1,41 @@
 const ExcelJS = require('exceljs');
 
 async function generarExcel() {
-  // Crear un nuevo libro de trabajo
   const workbook = new ExcelJS.Workbook();
-
-  // Agregar una hoja llamada "Ventas"
   const worksheet = workbook.addWorksheet('Ventas');
 
-  // Definir cabecera (primera fila)
   worksheet.columns = [
-    { header: 'Producto', key: 'producto', width: 20 },
-    { header: 'Cantidad', key: 'cantidad', width: 10 },
-    { header: 'Precio', key: 'precio', width: 10 }
+    { header: 'Producto', key: 'producto', width: 25 },
+    { header: 'Cantidad', key: 'cantidad', width: 15 },
+    { header: 'Precio', key: 'precio', width: 15 }
   ];
 
-  // Agregar 20 filas de ejemplo
-  const productos = [
-    ['Laptop', 5, 3200],
-    ['Mouse', 15, 50],
-    ['Teclado', 10, 120],
-    ['Monitor', 8, 950],
-    ['Impresora', 3, 600],
-    ['USB 32GB', 20, 40],
-    ['Disco Duro 1TB', 7, 280],
-    ['Auriculares', 12, 90],
-    ['Tablet', 6, 800],
-    ['Silla Gamer', 4, 750],
-    ['Parlante Bluetooth', 11, 150],
-    ['Webcam', 9, 200],
-    ['Microfono', 5, 300],
-    ['Router WiFi', 8, 180],
-    ['Cargador Laptop', 10, 130],
-    ['SSD 512GB', 6, 450],
-    ['Cable HDMI', 14, 35],
-    ['Proyector', 2, 1200],
-    ['Smartphone', 7, 2100],
-    ['Fuente de Poder', 5, 400],
+  const ventas = [
+    { producto: 'Laptop Lenovo IdeaPad 3', cantidad: 5, precio: 2300.50 },
+    { producto: 'Mouse Logitech M170', cantidad: 12, precio: 45.90 },
+    { producto: 'Teclado Mecánico Redragon', cantidad: 7, precio: 150.00 },
+    { producto: 'Monitor Samsung 24"', cantidad: 4, precio: 750.99 },
+    { producto: 'Impresora HP DeskJet 2135', cantidad: 3, precio: 399.90 },
+    { producto: 'Disco Duro Externo 1TB Seagate', cantidad: 9, precio: 280.00 },
+    { producto: 'Memoria USB 32GB Kingston', cantidad: 20, precio: 35.00 },
+    { producto: 'Audífonos Sony WH-1000XM4', cantidad: 2, precio: 1250.00 },
+    { producto: 'Silla Gamer Cougar Armor One', cantidad: 6, precio: 899.90 },
+    { producto: 'Router TP-Link Archer C6', cantidad: 10, precio: 180.00 },
+    { producto: 'Tablet Samsung Galaxy Tab A7', cantidad: 4, precio: 1200.00 },
+    { producto: 'Smartwatch Amazfit Bip U Pro', cantidad: 8, precio: 299.90 },
+    { producto: 'Cámara Logitech C920 HD Pro', cantidad: 5, precio: 399.00 },
+    { producto: 'Parlante JBL Flip 5', cantidad: 6, precio: 450.00 },
+    { producto: 'Fuente de Poder EVGA 600W', cantidad: 3, precio: 320.00 },
+    { producto: 'Tarjeta Gráfica NVIDIA GTX 1660', cantidad: 2, precio: 1350.00 },
+    { producto: 'MicroSD 128GB Sandisk', cantidad: 15, precio: 120.00 },
+    { producto: 'Lámpara LED Escritorio Xiaomi', cantidad: 10, precio: 89.90 },
+    { producto: 'Cargador Universal Laptop', cantidad: 7, precio: 150.00 },
+    { producto: 'SSD NVMe 1TB Western Digital', cantidad: 4, precio: 480.00 }
   ];
 
-  productos.forEach(p => worksheet.addRow({ producto: p[0], cantidad: p[1], precio: p[2] }));
+  ventas.forEach(venta => worksheet.addRow(venta));
 
-  // Guardar el archivo
-  await workbook.xlsx.writeFile('ventas.xlsx');
-  console.log('Archivo "ventas.xlsx" creado correctamente ✅');
+  return workbook;
 }
 
-generarExcel();
+module.exports = { generarExcel };
